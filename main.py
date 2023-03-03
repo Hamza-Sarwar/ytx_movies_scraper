@@ -13,9 +13,6 @@ def get_pages():
     return pages
 
 
-pages = get_pages()
-
-
 def get_movie(page):
     response = requests.get(page).text
     soup = BeautifulSoup(response, 'html.parser')
@@ -58,5 +55,7 @@ def get_movie(page):
     print(df)
 
 
-with ThreadPoolExecutor() as executor:
-    executor.map(get_movie, pages)
+if __name__ == '__main__':
+    pages = get_pages()
+    with ThreadPoolExecutor() as executor:
+        executor.map(get_movie, pages)
